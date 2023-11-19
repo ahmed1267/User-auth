@@ -7,7 +7,6 @@ export enum UserRole {
     USER = 'user',
 }
 
-
 // Define the document type for the user schema
 export type UserDocument = User & Document;
 
@@ -16,28 +15,23 @@ export type UserDocument = User & Document;
     timestamps: true, // Add timestamps for createdAt and updatedAt
 })
 export class User {
-
-    @Prop({ required: true }) // Ensure name is required
+    @Prop({ required: true }) // Ensure first name is required
     firstName: string;
 
-    @Prop({ required: true }) // Ensure name is required
+    @Prop({ required: true }) // Ensure last name is required
     lastName: string;
 
     @Prop({ required: true }) // Ensure password is required
     password: string;
 
-
-    @Prop({ required: true, unique: true })
+    @Prop({ required: true, unique: true }) // Ensure email is required and unique
     email: string;
 
-    @Prop({ required: true , default: false}) // Ensure name is required
+    @Prop({ required: true, default: false }) // Set default value for marketing consent and make it required
     marketingConsent: boolean;
 
-    
-    @Prop({ required: true, enum: UserRole, default: UserRole.USER }) // Add the role property
+    @Prop({ required: true, enum: UserRole, default: UserRole.USER }) // Add the role property with default as USER
     role: UserRole;
-
-
 }
 
 // Create the Mongoose schema for the user class

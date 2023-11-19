@@ -7,32 +7,31 @@ import { RefreshJwtGuard } from './guards/refresh-jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
-    userModel: any;
 
     constructor(
         private authService: AuthService,
-        private userService: UserService
+        private userService: UserService,
     ) { }
 
+    // Login route using LocalAuthGuard for local authentication
     @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Request() req) {
-        const user = req.user
-        return await this.authService.login(user)
+        const user = req.user;
+        return await this.authService.login(user);
     }
 
+    // Register route with validation using ValidationPipe
     @UsePipes(new ValidationPipe({ transform: true }))
     @Post('register')
-    async register(@Body() creatUserDto: CreateUserDto) {
-
-        return await this.userService.register(creatUserDto)
+    async register(@Body() createUserDto: CreateUserDto) {
+        return await this.userService.register(createUserDto);
     }
 
-
-
+    // Refresh token route using RefreshJwtGuard for token refresh
     @UseGuards(RefreshJwtGuard)
     @Post('refresh')
     async refreshToken(@Request() req) {
-        return this.authService.refreshToken(req.user)
+        return this.authService.refreshToken(req.user);
     }
 }
