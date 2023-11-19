@@ -16,11 +16,7 @@ Table of Contents
         Folder Structure
         Technologies Used
         Features
-        API Documentation
         Authentication
-        Testing
-        Contributing
-        License
 
 Installation
 
